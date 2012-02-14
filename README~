@@ -41,7 +41,7 @@ Example of serializing a relation
     ]
 
 Modifications:
-1. json4ext.py
+1. json4ext
 """
 Serialize data to/from JSON
 """
@@ -70,16 +70,3 @@ class Serializer(PythonSerializer):
             return self.stream.getvalue()
 
 Deserializer = JSONDeserializer
-2. python.py
-in parent class python.py line 54 changed this
-        self.objects.append({
-            "model"  : smart_unicode(obj._meta),
-            "pk"     : smart_unicode(obj._get_pk_val(), strings_only=True),
-            "fields" : self._fields
-        })
-    to this:
-        self.objects.append(self._fields)
-    !!!
-    overriding   def end_object(self, obj) in json4ext.py was NOT called by the recursion
-    """
-
